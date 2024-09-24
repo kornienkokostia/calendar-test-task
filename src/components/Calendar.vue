@@ -185,9 +185,13 @@ const onMouseOver = (day: string, time: number) => {
   if (isMousePressed.value) {
     const item = data.value[day];
     const fullTime = time * 60;
-    const isInItervalIndex = item.findIndex(el => fullTime >= el.bt + 60);
-    if (isInItervalIndex) {
+    const isInItervalIndexStart = item.findIndex(el => fullTime >= el.bt + 60);
+    const isInItervalIndexEnd = item.findIndex(el => fullTime >= el.bt - 60);
+    if (isInItervalIndexStart) {
       onItemClick(day, time - 1, true);
+    }
+    if (isInItervalIndexEnd) {
+      onItemClick(day, time + 1, true);
     }
     onItemClick(day, time, true);
   }
